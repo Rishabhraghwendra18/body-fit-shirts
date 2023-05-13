@@ -16,7 +16,15 @@ const Shirt = () => {
   useFrame((state, delta) => easing.dampC(materials.lambert1.color, snap.color, 0.25, delta));
 
   const stateString = JSON.stringify(snap);
-
+  const imageWidth = 1024; // Width of the image in pixels
+  const imageHeight = 1024; // Height of the image in pixels
+  const tshirtWidth = 2; // Reference width of the t-shirt mesh in your scene
+  
+  // Calculate the scale factor based on the reference size and image dimensions
+  const scaleFactor = tshirtWidth / imageWidth;
+  
+  // Calculate the corresponding height based on the scale factor
+  const tshirtHeight = imageHeight * scaleFactor;
   return (
     <group key={stateString}>
       <mesh
@@ -30,7 +38,9 @@ const Shirt = () => {
           <Decal 
             position={[0, 0, 0]}
             rotation={[0, 0, 0]}
-            scale={1}
+            // scale={[1024, 1024, 1]}
+            scale={0.7}
+            // uv={[0, 0, 1, 1]}
             map={fullTexture}
           />
         )}
